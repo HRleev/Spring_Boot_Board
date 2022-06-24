@@ -10,13 +10,17 @@ import javax.persistence.*;
 @Entity
 @Getter @Setter
 @Table(name = "board_table")
-public class BoardEntity {
+public class BoardEntity extends BaseEntity{
+    //상속을 받았기때문에 작성시간 수정시간을 모두 사용 할 수 있다
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "boardTitle",length = 50)
+    @Column(name = "boardTitle",length = 50 ,nullable = false)
+    //nullable = false -- notnull
     private String boardTitle;
     @Column(name = "boardWriter",length = 20)
     private String boardWriter;
@@ -33,7 +37,7 @@ public class BoardEntity {
         boardEntity.setBoardTitle(boardDTO.getBoardTitle());
         boardEntity.setBoardPassword(boardDTO.getBoardPassword());
         boardEntity.setBoardContents(boardDTO.getBoardContents());
-        boardEntity.setBoardHits(boardDTO.getBoardHits());
+        boardEntity.setBoardHits(0);
         return boardEntity;
     }
 }

@@ -21,7 +21,8 @@ public class BoardController {
     }
     @PostMapping("/save")
     public String save(@ModelAttribute BoardDTO boardDTO){
-        boardService.save(boardDTO);
-        return "/boardPages/list";
+        Long id= boardService.save(boardDTO);
+        return "redirect:/board/"+id;
     }
+
 }
