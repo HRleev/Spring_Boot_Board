@@ -16,9 +16,9 @@ import java.time.LocalDateTime;
 public class BaseEntity {
     @CreationTimestamp
     @Column(updatable = false)
-    private LocalDateTime createdTime;
+    private LocalDateTime createdTime; //새로 등록된 시간을 체크, update쿼리가 진행됐을 때 값은 false
 
     @UpdateTimestamp
     @Column(insertable = false)
-    private LocalDateTime updatedTime;
+    private LocalDateTime updatedTime; //업데이트 등록 시간을 체크, insert쿼리가 진행됐을 때 값은 false
 }
