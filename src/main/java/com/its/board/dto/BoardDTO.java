@@ -25,7 +25,7 @@ public class BoardDTO {
         this.boardHits = boardHits;
     }
 
-    public static BoardDTO boardDTO(BoardEntity boardEntity){
+    public static BoardDTO toDTO(BoardEntity boardEntity){
         BoardDTO boardDTO=new BoardDTO();
         boardDTO.setBoardTitle(boardEntity.getBoardTitle());
         boardDTO.setBoardWriter(boardEntity.getBoardWriter());

@@ -38,6 +38,7 @@ public class BoardEntity extends BaseEntity{
         boardEntity.setBoardPassword(boardDTO.getBoardPassword());
         boardEntity.setBoardContents(boardDTO.getBoardContents());
         boardEntity.setBoardHits(0);
+
         return boardEntity;
     }
 }

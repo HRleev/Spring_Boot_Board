@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th= "http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>detail</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>id</th>
+        <th>email</th>
+        <th>password</th>
+        <th>name</th>
+        <th>age</th>
+        <th>mobile</th>
+        <th>수정</th>
+    </tr>
+    <tr>
+        <td th:text="${board.id}"></td>
+        <td th:text="${board.boardTitle}"></td>
+        <td th:text="${board.boardWriter}"></td>
+        <td th:text="${board.boardPassword}"></td>
+        <td th:text="${board.boardContents}"></td>
+        <td th:text="${board.boardHits}"></td>
+        <td>
+            <input type="button" th:onclick="updateCheck([[${board.id}]])" value="수정">
+        </td>
+        <td><div id="pwCheck-result"></div></td>
+    </tr>
+</table>
+
+</body>
+<script>
+    const updateCheck = (id) => {
+        const checkResult =document.getElementById("pwCheck-result");
+        checkResult.innerHTML+= "<input type='text'/>" + "<input type='button' value='확인' th:href=\"@{|/board/update/${board.id}|}\"/>"
+
+    }
+
+</script>
+</html>
