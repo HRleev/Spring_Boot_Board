@@ -19,8 +19,9 @@
         <td><a th:href="@{|/board/${board.id}|}" th:text="${board.boardTitle}"></a></td>
         <td th:text="${board.boardWriter}"></td>
         <td th:text="${board.boardPassword}"></td>
-        <td th:text="*{#temporals.format(board.createdTime,'yyy-MM-dd HH:mm:ss')}"></td>
         <td th:text="${board.boardHits}"></td>
+        <td th:text="*{#temporals.format(board.createdTime,'yyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="*{#temporals.format(board.updatedTime,'yyy-MM-dd HH:mm:ss')}"></td>
 
     </tr>
 </table>
