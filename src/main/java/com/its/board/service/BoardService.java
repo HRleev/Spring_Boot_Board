@@ -32,7 +32,8 @@ public class BoardService {
     public BoardDTO findById(Long id) {
         Optional<BoardEntity>optionalBoardEntity=boardRepository.findById(id);
         if(optionalBoardEntity.isPresent()){
-            return BoardDTO.toDTO(optionalBoardEntity.get());
+            BoardEntity boardEntity=optionalBoardEntity.get();
+            return BoardDTO.toDTO(boardEntity);
         }else {
             return null;
         }

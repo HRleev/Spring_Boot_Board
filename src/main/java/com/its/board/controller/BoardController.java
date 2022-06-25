@@ -35,7 +35,9 @@ public class BoardController {
 
         BoardDTO boardDTO=boardService.findById(id);
         model.addAttribute("board",boardDTO);
-        return "boardPages/detail";
+        System.out.println("BoardController.findById");
+        System.out.println("id = " + id + ", model = " + model);
+        return "/boardPages/detail";
     }
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable("id") Long id,@ModelAttribute BoardDTO boardDTO){

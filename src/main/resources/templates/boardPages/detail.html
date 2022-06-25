@@ -6,13 +6,13 @@
     <title>detail</title>
 </head>
 <body>
-<input type="hidden" name="id" id="id" th:value="${board.getId()}">
-<span th:text="${board.getBoardTitle()}"></span><br>
-<span th:text="${board.getBoardWriter()}"></span><br>
-<span th:text="${board.getBoardContents()}"></span><br>
-<span th:text="${board.getBoardHits()}"></span><br>
-<span th:text="*{#temporals.format(board.getCreatedTime(),'yyyy-MM-dd HH:mm:ss'}"></span><br>
-<span th:text="*{#temporals.format(board.getUpdatedTime(),'yyyy-MM-dd HH:mm:ss'}"></span><br>
+<input type="hidden" name="id" id="id" th:value="${board.Id}">
+<span th:text="${board.BoardTitle}"></span><br>
+<span th:text="${board.BoardWriter}"></span><br>
+<span th:text="${board.BoardContents}"></span><br>
+<span th:text="${board.BoardHits}"></span><br>
+<span th:text="*{#temporals.format(board.CreatedTime,'yyyy-MM-dd HH:mm:ss'}"></span><br>
+<span th:text="*{#temporals.format(board.UpdatedTime,'yyyy-MM-dd HH:mm:ss'}"></span><br>
 <button type="button" onclick="update()">수정</button>
 <button type="button" onclick="boardDelete()">삭제</button>
 <button type="button" onclick="findAll()">목록</button>
