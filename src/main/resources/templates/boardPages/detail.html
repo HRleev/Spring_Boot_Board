@@ -15,6 +15,9 @@
         <th>boardPassword</th>
         <th>boardContents</th>
         <th>boardHits</th>
+        <th>createdTime</th>
+        <th>updatedTime</th>
+        <th>boardFile</th>
     </tr>
     <tr>
         <td th:text="${board.id}" id="id"></td>
@@ -25,6 +28,7 @@
         <td th:text="${board.boardHits}"></td>
         <td th:text="*{#temporals.format(board.createdTime,'yyy-MM-dd HH:mm:ss')}"></td>
         <td th:text="*{#temporals.format(board.updatedTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td><img th:src="@{|/upload/${board.boardFileName}|}" width="100" height="100" alt="" ></td>
     </tr>
     <!--    <button type="button" onclick="update()">수정</button>-->
     <!--    <button type="button" onclick="boardDelete()">삭제</button>-->

@@ -4,6 +4,7 @@ import com.its.board.common.PagingConst;
 import com.its.board.dto.BoardDTO;
 import com.its.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 @Controller
@@ -25,9 +29,14 @@ public class BoardController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute BoardDTO boardDTO) {
+    public String save(@ModelAttribute BoardDTO boardDTO) throws IOException{
         Long id = boardService.save(boardDTO);
         return "redirect:/board/" + id;
+    }
+    @ResponseBody
+    @GetMapping("/images/{filename}")
+    public Resource showImage(@PathVariable String filename) throws MalformedURLException{
+        return new UrlResource("file:" + file.getFullPath(filename));
     }
 
     @GetMapping("/")
@@ -80,4 +89,5 @@ public class BoardController {
         model.addAttribute("endPage", endPage);
         return "boardPages/paging";
     }
+
 }
