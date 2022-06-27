@@ -28,6 +28,13 @@ public class BoardDTO {
         this.boardContents = boardContents;
         this.boardHits = boardHits;
     }
+    public BoardDTO(Long id, String boardTitle, String boardWriter, int boardHits, LocalDateTime createdTime) {
+        this.id = id;
+        this.boardTitle = boardTitle;
+        this.boardWriter = boardWriter;
+        this.boardHits = boardHits;
+        this.createdTime = createdTime;
+    }
 
     public static BoardDTO toDTO(BoardEntity boardEntity){
         BoardDTO boardDTO=new BoardDTO();

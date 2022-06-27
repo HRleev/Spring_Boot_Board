@@ -24,53 +24,79 @@
         <td th:text="${board.boardPassword}"></td>
         <td th:text="${board.boardHits}"></td>
         <td th:text="*{#temporals.format(board.createdTime,'yyy-MM-dd HH:mm:ss')}"></td>
-        <td  th:text="*{#temporals.format(board.updatedTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="*{#temporals.format(board.updatedTime,'yyyy-MM-dd HH:mm:ss')}"></td>
     </tr>
-    <button type="button" onclick="update()">수정</button>
-    <button type="button" onclick="boardDelete()">삭제</button>
-    <button type="button" onclick="findAll()">목록</button>
-    <div id="pwCheck"></div>
+    <!--    <button type="button" onclick="update()">수정</button>-->
+    <!--    <button type="button" onclick="boardDelete()">삭제</button>-->
+    <!--    <button type="button" onclick="findAll()">목록</button>-->
+    <button type="button" onclick="req(1)">수정</button>
+    <button type="button" onclick="req(2)">삭제</button>
+    <div id="pwCk"></div>
 </table>
 </body>
-<script>
-    const update = () => {
-        let output = '<input type="text" id="checkPassword" placeholder="비밀번호 입력">';
-        output += '<button type="button" onclick="pwCheck()">확인</button>';
-
-        document.getElementById("pwCheck").innerHTML = output;
+<script th:inline="javascript">
+    function req(num) {
+        document.getElementById("pwCk").innerHTML = "비밀번호를 입력하세요" + "<input type='text' id='pw'>" + "<button onClick='pwCk(" + num + ")'>확인</button>"
     }
-    const pwCheck = () => {
-        const boardId = document.getElementById("id").value;
-        const pw = document.getElementById("checkPassword").value;
-        const dbPw = '[[${board.getBoardPassword}]]';
 
-        if (pw == dbPw) {
-            location.href = 'board/update/' + boardId;
+
+    function pwCk(num) {
+        console.log("pwCk", num)
+        const pwConfirm = document.getElementById("pw").value;
+        console.log(pwConfirm);
+        const id = [[${board.id}]];
+        const password = [[${board.boardPassword}]];
+        if (password == pwConfirm) {
+            if (num == 1) {
+                location.href = "/board/update/" + id;
+            } else {
+                location.href = "/board/delete/" + id;
+            }
         } else {
-            alert("놉");
+            alert("틀려요");
         }
     }
-    const boardDelete = () => {
-        let output = '<input type="text" id="checkPassword" placeholder="비밀번호 입력">';
-        output += '<button type="button" onclick="pwCheck2()">확인</button>';
 
-        document.getElementById("pwCheck").innerHTML = output;
-    }
-    const pwCheck2 = () => {
-        console.log("함수호출");
-        const boardId = document.getElementById("id").value;
-        const pw = document.getElementById("checkPassword").value;
-        const dbPw = '[[${board.getBoardPassword}]]';
 
-        if (pw == dbPw) {
-            location.href = 'board/delete/' + boardId;
-        } else {
-            alert("노옵");
-        }
-    }
-    const findAll = () => {
-        location.href = '/board/';
-    }
+    // const update = () => {
+    //     let inputTag = '<input type=\"text"\ id=\"checkPassword"\ placeholder="비밀번호 입력">' +
+    //         '<button onclick=\"pwCheck()"\>확인</button>';
+    //
+    //     document.getElementById("pwCheck").innerHTML = inputTag;
+    // }
+    // const pwCheck = () => {
+    //     const boardId = [[${board.id}]];
+    //     const pw = document.getElementById("checkPassword").value;
+    //     const dbPw = [[${board.getBoardPassword}]];
+    //     console.log(pw);
+    //     console.log(dbPw);
+    //     if (pw == dbPw) {
+    //         location.href = 'board/update/' + boardId;
+    //     } else {
+    //         alert("놉");
+    //     }
+    // }
+    // const boardDelete = () => {
+    //     let output = '<input type="text" id="checkPassword" placeholder="비밀번호 입력">';
+    //     output += '<button type="button" onclick="pwCheck2()">확인</button>';
+    //
+    //     document.getElementById("pwCheck").innerHTML = output;
+    // }
+    // const pwCheck2 = () => {
+    //     console.log("함수호출");
+    //     const boardId = document.getElementById("id").value;
+    //     const pw = document.getElementById("checkPassword").value;
+    //     const dbPw = '[[${board.getBoardPassword}]]';
+    //
+    //     if (pw == dbPw) {
+    //         location.href = 'board/delete/' + boardId;
+    //     } else {
+    //         alert("노옵");
+    //     }
+    // }
+    // const findAll = () => {
+    //     location.href = '/board/';
+    // }
 
 
 </script>
