@@ -5,6 +5,7 @@ import com.its.board.entity.BoardEntity;
 import com.its.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +30,17 @@ public class BoardService {
         }return  boardDTOList;
     }
 
+    @Transactional
     public BoardDTO findById(Long id) {
+        //조회수 처리
+        //native sql:update board_table set boardHits=boardHits+1 where id=?
+
+        boardRepository.boardHits(id);
         Optional<BoardEntity>optionalBoardEntity=boardRepository.findById(id);
         if(optionalBoardEntity.isPresent()){
             BoardEntity boardEntity=optionalBoardEntity.get();
             return BoardDTO.toDTO(boardEntity);
+//            return BoardDTO.toDTO(optionalBoardEntity.get());
         }else {
             return null;
         }

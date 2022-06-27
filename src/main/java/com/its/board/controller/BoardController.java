@@ -16,36 +16,41 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/save-form")
-    public String saveForm(){
+    public String saveForm() {
         return "/boardPages/save";
     }
+
     @PostMapping("/save")
-    public String save(@ModelAttribute BoardDTO boardDTO){
-        Long id= boardService.save(boardDTO);
-        return "redirect:/board/"+id;
+    public String save(@ModelAttribute BoardDTO boardDTO) {
+        Long id = boardService.save(boardDTO);
+        return "redirect:/board/" + id;
     }
+
     @GetMapping("/")
-    public String findAll(Model model){
-        List<BoardDTO> boardDTOList=boardService.findAll();
-        model.addAttribute("boardList",boardDTOList);
+    public String findAll(Model model) {
+        List<BoardDTO> boardDTOList = boardService.findAll();
+        model.addAttribute("boardList", boardDTOList);
         return "/boardPages/findAll";
     }
-    @GetMapping("/{id}")
-    public String findById(@PathVariable Long id,Model model){
 
-        BoardDTO boardDTO=boardService.findById(id);
-        model.addAttribute("board",boardDTO);
+    @GetMapping("/{id}")
+    public String findById(@PathVariable Long id, Model model) {
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("board", boardDTO);
         System.out.println("BoardController.findById");
         System.out.println("id = " + id + ", model = " + model);
         return "/boardPages/detail";
     }
+
     @GetMapping("/update/{id}")
-    public String updateForm(@PathVariable("id") Long id,@ModelAttribute BoardDTO boardDTO){
+    public String updateForm(@PathVariable("id") Long id, @ModelAttribute BoardDTO boardDTO) {
         boardService.update(boardDTO);
-        return "redirect:/board/"+id;
+
+        return "redirect:/board/" + id;
     }
+
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Long id){
+    public String delete(@PathVariable("id") Long id) {
         boardService.delete(id);
         return "redirect:/board/";
     }

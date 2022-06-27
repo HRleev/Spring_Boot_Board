@@ -1,60 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 <head>
     <meta charset="UTF-8">
     <title>detail</title>
 </head>
 <body>
-<input type="hidden" name="id" id="id" th:value="${board.Id}">
-<span th:text="${board.BoardTitle}"></span><br>
-<span th:text="${board.BoardWriter}"></span><br>
-<span th:text="${board.BoardContents}"></span><br>
-<span th:text="${board.BoardHits}"></span><br>
-<span th:text="*{#temporals.format(board.CreatedTime,'yyyy-MM-dd HH:mm:ss'}"></span><br>
-<span th:text="*{#temporals.format(board.UpdatedTime,'yyyy-MM-dd HH:mm:ss'}"></span><br>
-<button type="button" onclick="update()">수정</button>
-<button type="button" onclick="boardDelete()">삭제</button>
-<button type="button" onclick="findAll()">목록</button>
-<div id="pwCheck"></div>
+<table>
+    <tr>
+        <th>id</th>
+        <th>boardTitle</th>
+        <th>boardWriter</th>
+        <th>boardPassword</th>
+        <th>boardContents</th>
+        <th>boardHits</th>
+    </tr>
+    <tr>
+        <td th:text="${board.id}" id="id"></td>
+        <td th:text="${board.boardTitle}"></td>
+        <td><a th:href="@{|/board/${board.id}|}" th:text="${board.boardTitle}"></a></td>
+        <td th:text="${board.boardWriter}"></td>
+        <td th:text="${board.boardPassword}"></td>
+        <td th:text="${board.boardHits}"></td>
+        <td th:text="*{#temporals.format(board.createdTime,'yyy-MM-dd HH:mm:ss')}"></td>
+        <td  th:text="*{#temporals.format(board.updatedTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+    </tr>
+    <button type="button" onclick="update()">수정</button>
+    <button type="button" onclick="boardDelete()">삭제</button>
+    <button type="button" onclick="findAll()">목록</button>
+    <div id="pwCheck"></div>
+</table>
 </body>
 <script>
     const update = () => {
         let output = '<input type="text" id="checkPassword" placeholder="비밀번호 입력">';
         output += '<button type="button" onclick="pwCheck()">확인</button>';
 
-        document.querySelector("pwCheck").innerHTML = output;
+        document.getElementById("pwCheck").innerHTML = output;
     }
-    const pwCheck=()=>{
-        const boardId=document.getElementById("id").value;
-        const pw =document.getElementById("checkPassword").value;
-        const dbPw='[[${board.getBoardPassword}]]';
+    const pwCheck = () => {
+        const boardId = document.getElementById("id").value;
+        const pw = document.getElementById("checkPassword").value;
+        const dbPw = '[[${board.getBoardPassword}]]';
 
-        if(pw==dbPw){
-            location.href='board/update/'+boardId;
-        }else {
+        if (pw == dbPw) {
+            location.href = 'board/update/' + boardId;
+        } else {
             alert("놉");
         }
     }
-    const boardDelete=()=>{
+    const boardDelete = () => {
         let output = '<input type="text" id="checkPassword" placeholder="비밀번호 입력">';
         output += '<button type="button" onclick="pwCheck2()">확인</button>';
 
-        document.querySelector("pwCheck").innerHTML = output;
+        document.getElementById("pwCheck").innerHTML = output;
     }
-    const pwCheck2 =()=>{
-        const boardId= document.getElementById("id").value;
-        const pw= document.getElementById("checkPassword").value;
-        const dbPw='[[${board.getBoardPassword}]]';
+    const pwCheck2 = () => {
+        console.log("함수호출");
+        const boardId = document.getElementById("id").value;
+        const pw = document.getElementById("checkPassword").value;
+        const dbPw = '[[${board.getBoardPassword}]]';
 
-        if(pw==dbPw){
-            location.href='board/delete/'+boardId;
-        }else {
+        if (pw == dbPw) {
+            location.href = 'board/delete/' + boardId;
+        } else {
             alert("노옵");
         }
     }
-    const findAll=()=>{
-        location.href='/board/';
+    const findAll = () => {
+        location.href = '/board/';
     }
 
 

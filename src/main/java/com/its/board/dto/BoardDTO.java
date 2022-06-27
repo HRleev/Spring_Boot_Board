@@ -31,6 +31,7 @@ public class BoardDTO {
 
     public static BoardDTO toDTO(BoardEntity boardEntity){
         BoardDTO boardDTO=new BoardDTO();
+        boardDTO.setId(boardEntity.getId());
         boardDTO.setBoardTitle(boardEntity.getBoardTitle());
         boardDTO.setBoardWriter(boardEntity.getBoardWriter());
         boardDTO.setBoardPassword(boardEntity.getBoardPassword());
